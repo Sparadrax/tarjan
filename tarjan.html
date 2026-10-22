@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!-- Tarjan strongly connected components demo. A depth-first search records index, low-link, stack, and completed components for playback. -->
+<html lang="en">
+<head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Step through Tarjan's algorithm to discover strongly connected components in directed graphs.">
+    <title>Tarjan's Algorithm — Louis du Beux</title>
+    <link rel="stylesheet" href="/Lib/Bootstrap4.0/css/bootstrap.min.css"><link rel="stylesheet" href="/NavBar.css"><link rel="stylesheet" href="./tarjan.css"><link rel="stylesheet" href="/Theme.css?v=2">
+    <script src="/NavBar.js" defer></script>
+    <link rel="canonical" href="https://louisdubeux.com/Projects/tarjan/tarjan.html">
+</head>
+<body>
+    <!-- Shared navigation is populated by /NavBar.js. -->
+    <div id="nav-placeholder"></div>
+    <main class="container-fluid py-4">
+        <header><p class="section-label">Graph exploration</p><h1>Tarjan's Algorithm</h1><p class="text-muted">Find strongly connected components: groups of nodes where every node can reach every other node by following the arrows.</p></header>
+        <div class="tarjan-layout">
+            <aside class="tarjan-controls">
+                <form id="graph-form"><label for="node-count">Nodes <output id="node-count-value">9</output></label><input id="node-count" type="range" min="3" max="18" value="9">
+                    <label for="edge-density">Edge probability <output id="edge-density-value">15%</output></label><input id="edge-density" type="range" min="0" max="45" value="15">
+                    <button class="btn btn-outline-light" type="submit">Random graph</button></form>
+                <button id="example" class="btn btn-outline-light" type="button">Example graph</button>
+                <label for="speed">Steps per second <output id="speed-value">3</output></label><input id="speed" type="range" min="1" max="12" value="3">
+                <div class="playback"><button id="play" class="btn btn-primary" type="button">Play</button><button id="previous" class="btn btn-outline-light" type="button">Back</button><button id="next" class="btn btn-outline-light" type="button">Step</button><button id="reset" class="btn btn-outline-light" type="button">Reset</button><button id="finish" class="btn btn-outline-light" type="button">Show result</button></div>
+                <p id="step-count" class="text-muted"></p><p id="trace-message" role="status" aria-live="polite"></p>
+                <h2>Active stack</h2><p id="stack"></p><h2>Components</h2><ul id="components"></ul>
+                <p class="text-muted small">Index records when a node is first visited. Low-link is the earliest index reachable through the current search and nodes still on the stack. Matching index and low-link identifies a component root.</p>
+            </aside>
+            <section class="graph-panel" aria-label="Directed graph visualization"><svg id="graph" viewBox="0 0 800 650" role="img" aria-labelledby="graph-title"><title id="graph-title">Directed graph for Tarjan's algorithm</title></svg><p class="text-muted small">Teal ring: current node · Gold: active edge · Filled colors: completed components.</p><div class="table-responsive"><table class="table table-sm"><thead><tr><th scope="col">Node</th><th scope="col">Index</th><th scope="col">Low-link</th><th scope="col">On stack</th></tr></thead><tbody id="node-table"></tbody></table></div></section>
+        </div>
+    </main>
+    <!-- Load the project entry module after its controls and view containers exist. -->
+    <script type="module" src="./tarjan.js"></script>
+</body>
+</html>

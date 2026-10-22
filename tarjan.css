@@ -1,0 +1,26 @@
+/* Tarjan strongly connected components demo. A depth-first search records index, low-link, stack, and completed components for playback.
+ * Page-specific layout and controls; shared theme colors are supplied by /Theme.css.
+ */
+main { max-width: 1500px; }
+.section-label { color: var(--site-accent); text-transform: uppercase; font-size: .75rem; letter-spacing: .12em; }
+.tarjan-layout { display: grid; grid-template-columns: 310px minmax(0,1fr); gap: 1.5rem; align-items: start; }
+.tarjan-controls,.graph-panel { background: var(--site-surface); border: 1px solid var(--site-border); border-radius: 12px; padding: 1.25rem; }
+.tarjan-controls label { display: block; margin: .75rem 0 .3rem; }
+.tarjan-controls input[type="range"] { display: block; width: 100%; margin-bottom: .75rem; }
+.tarjan-controls output { float: right; color: var(--site-accent); }
+.tarjan-controls button { margin: .25rem .25rem .25rem 0; }
+.playback { display: flex; flex-wrap: wrap; margin: 1rem 0; }
+.tarjan-controls h2 { font-size: 1rem; margin-top: 1.25rem; }
+#trace-message { min-height: 5rem; }
+#stack { color: var(--site-accent); }
+#components { list-style: none; padding: 0; }
+#components li { margin: .5rem 0; }
+.component-swatch { display: inline-block; width: .85rem; height: .85rem; border-radius: 3px; margin-right: .5rem; }
+#graph { display: block; width: 100%; max-height: 65vh; }
+#graph text { font: 18px sans-serif; text-anchor: middle; dominant-baseline: middle; fill: var(--site-text); }
+#graph .node circle { stroke: var(--site-muted); stroke-width: 2; }
+#graph .node.current circle { stroke: var(--site-accent); stroke-width: 5; }
+#graph .edge { fill: none; stroke: var(--site-muted); stroke-width: 1.8; }
+#graph .edge.active { stroke: #ffdf7c; stroke-width: 3; }
+/* Stack or resize the project layout on narrower screens. */
+@media(max-width:700px) { .tarjan-layout { grid-template-columns: 1fr; } }
